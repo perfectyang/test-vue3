@@ -1,144 +1,62 @@
-import { createVNode as _createVNode, createApp, render } from 'vue'
+// import { createVNode as _createVNode, createApp, render } from 'vue'
 import App from './App.vue'
-import './index.css'
-import {computed, reactive, effect, toRefs, track, ref, trigger, stop, readonly} from '@vue/reactivity'
+// import {computed, reactive, effect, toRefs, track, ref, trigger, stop, readonly} from '@vue/reactivity'
+import { createApp, toDisplayString as _toDisplayString, createVNode as _createVNode, createTextVNode as _createTextVNode, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, withScopeId as _withScopeId, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from "vue"
+// <div>
+//   <p class="name name2" >我是中文
+//      {{id}}
+//     <p>aaa</p>
+//   </p>
+//   <p>我是中文</p>
+//   <p>我是中文</p>
+//   <p @click="() => {}">我是中文</p>
+//   <p>我是中文</p>
+//   <p v-for="a in 10" :key="a" v-if="a">我是中2222文</p>
+//   <p>{{name}}</p>
+//   <p :class="[bool ? 'a' : 'b']">我是中文</p>
+//   <p>我是中文</p>
+// </div>
 
-const vnode = _createVNode('div', {
-  id: 'app'
-}, [
-  _createVNode('p', null, '在这要'),
- "在这要", 
-  _createVNode('p', null, '')
-]
-)
-console.log(vnode)
-const state = reactive({
-  foo: 1,
-  bar: 2,
+const _withId = /*#__PURE__*/_withScopeId("scope-id")
+
+_pushScopeId("scope-id")
+const _hoisted_1 = { class: "name name2" }
+const _hoisted_2 = /*#__PURE__*/_createVNode("p", null, "aaa", -1 /* HOISTED */)
+const _hoisted_3 = /*#__PURE__*/_createVNode("p", null, "我是中文", -1 /* HOISTED */)
+const _hoisted_4 = /*#__PURE__*/_createVNode("p", null, "我是中文", -1 /* HOISTED */)
+const _hoisted_5 = /*#__PURE__*/_createVNode("p", null, "我是中文", -1 /* HOISTED */)
+const _hoisted_6 = /*#__PURE__*/_createVNode("p", null, "我是中文", -1 /* HOISTED */)
+_popScopeId()
+
+export const render = /*#__PURE__*/_withId(function render(ctx, cache) {
+  let _cache = {
+
+  }
+  let _ctx = ctx || {
+    id: 'perfectyang'
+  }
+  return (_openBlock(), _createBlock("div", null, [
+    _createVNode("p", _hoisted_1, [
+      _createTextVNode("我是中文 " + _toDisplayString(_ctx.id) + " ", 1 /* TEXT */),
+      _hoisted_2
+    ]),
+    _hoisted_3,
+    _hoisted_4,
+    _createVNode("p", {
+      onClick: _cache[1] || (_cache[1] = () => {})
+    }, "我是中文"),
+    _hoisted_5,
+    (_ctx.a)
+      ? (_openBlock(), _createBlock(_Fragment, { key: 0 }, _renderList(10, (a) => {
+          return _createVNode("p", { key: a }, "我是中2222文")
+        }), 64 /* STABLE_FRAGMENT */))
+      : _createCommentVNode("v-if", true),
+    _createVNode("p", null, _toDisplayString(_ctx.name), 1 /* TEXT */),
+    _createVNode("p", {
+      class: [_ctx.bool ? 'a' : 'b']
+    }, "我是中文", 2 /* CLASS */),
+    _hoisted_6
+  ]))
 })
-// ref.value
-// computed.value
-// watchEffect(() => {
-// })
-// watch()
-
-const stateAsRefs = toRefs(state)
-
-console.log(stateAsRefs.foo)
-state.foo = 2;
-console.log(stateAsRefs)
-stateAsRefs.foo.value++
-console.log(state.foo)
-// const state = reactive({
-//   age: 1,
-//   count: 1,
-//   list: ['a']
-// })
-// // watch(() => state.list, (value, oldValue) => {
-// //   console.log(value, oldValue)
-// // }, {
-// //   immediate: true,
-// //   deep: true
-// // })
-// const count = ref(0)
-// const count2 = ref(1)
-// watch([count,count2], ([count, count2], [prevCount, prevCount2]) => {
-//   console.log(count, prevCount)
-//   console.log(count2, prevCount2)
-// }, {
-//   immediate: true
-// })
-
-// // state.list.push(222)
-// count.value = 2;
-// count2.value = 4;
-
-// // console.log(state)
-
-// const myAge = computed({
-//   get () {
-//     return state.age
-//   },
-//   set(value) {
-//     state.age += value
-//   }
-// })
-
-// console.log(myAge.value)
-// myAge.value = 20
-// console.log(myAge.value)
-// const myref = ref('myref')
-
-// const newEffts = effect((value) => {
-//   console.log(value)
-//   console.log(myref.value)
-//   // console.log(state.age)
-//   // console.log(state.count)
-// }, {
-//   lazy: true
-// })
-// newEffts('在这果要要')
-// console.log(state)
-// myref.value = 2
-
-
-// const myrefs = ref('a')
-// console.log(myrefs.value)
-// myrefs.value = 2;
-// const copy = readonly(state)
-// const count = computed(() => {
-  // console.log('a')
-  // return state.age + 1;
-// })
-// const ef = effect(() => {
-//   console.log('change', copy.age)
-// })
-// state.age++;
-// copy.age++;
-// console.log('ef', ef)
-// stop(ef)
-// state.age = 2;
-// // effect(() => {
-// //   console.log('在这果', state.count)
-// // })
-// const obj = {
-// }
-// let a = 0
-// Object.defineProperty(obj, 'age', {
-//   get () {
-//     track(obj, 'get', 'age')
-//     return a;
-//   },
-//   set (val) {
-//     trigger(obj, 'set', 'age', val, a)
-//     a = val
-//   }
-// })
-// // console.log('before', count.value)
-
-// // console.log('after', count.value)
-// obj.age = 2
-// function myref(rawValue) {
-//   let value = rawValue
-//   let r = {
-//     get value() {
-//       console.log('获取')
-//       return value
-//     },
-//     set value(newValue) {
-//       if (newValue !== rawValue) {
-//         console.log('设值')
-//         rawValue = newValue
-//         value = newValue
-//       }
-//     }
-//   }
-//   return r
-// }
-// const rs = myref('在这果')
-
-// console.log(rs.value)
-// rs.value = 1;
-// rs.value = 2;
-// console.log(rs.value)
+console.log('vnode', render())
 createApp(App).mount('#app')
