@@ -6,7 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "vite": "^1.0.0-beta.10",
+    "vite": "^2.9.13",
     "vue": "^3.0.0-beta.18"
   },
   "devDependencies": {
